@@ -9,7 +9,7 @@ import {
   listExtensions,
   getErrorMessage,
   type ExtensionInstallMetadata,
-} from '@google/gemini-cli-core';
+} from '@pocketclaw/core';
 import type { ExtensionUpdateInfo } from '../../config/extension.js';
 import {
   emptyIcon,

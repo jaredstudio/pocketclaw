@@ -13,7 +13,7 @@ import {
   isSubagentProgress,
   checkExhaustive,
   type SubagentActivityItem,
-} from '@google/gemini-cli-core';
+} from '@pocketclaw/core';
 import {
   SubagentProgressDisplay,
   formatToolArgs,

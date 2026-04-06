@@ -6,7 +6,7 @@
 
 import { renderWithProviders } from '../../test-utils/render.js';
 import { createMockSettings } from '../../test-utils/settings.js';
-import { makeFakeConfig } from '@google/gemini-cli-core';
+import { makeFakeConfig } from '@pocketclaw/core';
 import { waitFor } from '../../test-utils/async.js';
 import { act, useState, useMemo } from 'react';
 import {
@@ -24,7 +24,7 @@ import {
   ApprovalMode,
   debugLogger,
   type Config,
-} from '@google/gemini-cli-core';
+} from '@pocketclaw/core';
 import * as path from 'node:path';
 import {
   CommandKind,

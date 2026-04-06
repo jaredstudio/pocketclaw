@@ -1,11 +1,11 @@
 {
-  "name": "@google/gemini-cli-core",
+  "name": "@pocketclaw/core",
   "version": "0.36.0-nightly.20260317.2f90b4653",
-  "description": "Gemini CLI Core",
+  "description": "PocketClaw Core",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/google-gemini/gemini-cli.git"
+    "url": "git+https://github.com/pocketclaw/pocketclaw.git"
   },
   "type": "module",
   "main": "dist/index.js",
@@ -101,10 +101,11 @@
     "node-pty": "^1.0.0"
   },
   "devDependencies": {
-    "@google/gemini-cli-test-utils": "file:../test-utils",
+    "@pocketclaw/test-utils": "file:../test-utils",
     "@types/fast-levenshtein": "^0.0.4",
     "@types/js-yaml": "^4.0.9",
     "@types/json-stable-stringify": "^1.1.0",
+    "@types/node": "^20.19.1",
     "@types/picomatch": "^4.0.1",
     "chrome-devtools-mcp": "^0.19.0",
     "msw": "^2.3.4",

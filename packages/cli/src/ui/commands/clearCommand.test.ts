@@ -10,8 +10,8 @@ import { type CommandContext } from './types.js';
 import { createMockCommandContext } from '../../test-utils/mockCommandContext.js';
 
 // Mock the telemetry service
-vi.mock('@google/gemini-cli-core', async () => {
-  const actual = await vi.importActual('@google/gemini-cli-core');
+vi.mock('@pocketclaw/core', async () => {
+  const actual = await vi.importActual('@pocketclaw/core');
   return {
     ...actual,
     uiTelemetryService: {
@@ -21,7 +21,7 @@ vi.mock('@google/gemini-cli-core', async () => {
   };
 });
 
-import { uiTelemetryService, type GeminiClient } from '@google/gemini-cli-core';
+import { uiTelemetryService, type GeminiClient } from '@pocketclaw/core';
 
 describe('clearCommand', () => {
   let mockContext: CommandContext;

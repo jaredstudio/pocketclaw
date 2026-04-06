@@ -48,7 +48,7 @@ import {
   coreEvents,
   debugLogger,
   type Config,
-} from '@google/gemini-cli-core';
+} from '@pocketclaw/core';
 import {
   parseInputForHighlighting,
   parseSegmentsFromTokens,

@@ -13,7 +13,7 @@ import {
   type Config,
   PolicyDecision,
   ApprovalMode,
-} from '@google/gemini-cli-core';
+} from '@pocketclaw/core';
 
 describe('policiesCommand', () => {
   let mockContext: ReturnType<typeof createMockCommandContext>;

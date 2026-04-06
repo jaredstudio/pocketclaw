@@ -9,7 +9,7 @@ import {
   fetchWithTimeout,
   resolveToRealPath,
   isPrivateIp,
-} from '@google/gemini-cli-core';
+} from '@pocketclaw/core';
 import { AsyncFzf } from 'fzf';
 
 export interface RegistryExtension {

@@ -16,7 +16,7 @@ import {
   processSingleFileContent,
   partToString,
   readFileWithEncoding,
-} from '@google/gemini-cli-core';
+} from '@pocketclaw/core';
 import { MessageType } from '../types.js';
 import * as path from 'node:path';
 import { copyToClipboard } from '../utils/commandUtils.js';

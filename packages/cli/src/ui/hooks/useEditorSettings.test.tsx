@@ -26,13 +26,13 @@ import {
   type EditorType,
   hasValidEditorCommand,
   allowEditorTypeInSandbox,
-} from '@google/gemini-cli-core';
+} from '@pocketclaw/core';
 import type { UseHistoryManagerReturn } from './useHistoryManager.js';
 
 import { SettingPaths } from '../../config/settingPaths.js';
 
-vi.mock('@google/gemini-cli-core', async () => {
-  const actual = await vi.importActual('@google/gemini-cli-core');
+vi.mock('@pocketclaw/core', async () => {
+  const actual = await vi.importActual('@pocketclaw/core');
   return {
     ...actual,
     hasValidEditorCommand: vi.fn(() => true),

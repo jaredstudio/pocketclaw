@@ -9,7 +9,7 @@ import {
   sessionId as globalSessionId,
   Logger,
   type Storage,
-} from '@google/gemini-cli-core';
+} from '@pocketclaw/core';
 import { ConfigContext } from '../contexts/ConfigContext.js';
 
 /**

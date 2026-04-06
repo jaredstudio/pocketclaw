@@ -47,7 +47,7 @@ import {
   type OutputFormat,
   detectIdeFromEnv,
   generalistProfile,
-} from '@google/gemini-cli-core';
+} from '@pocketclaw/core';
 import {
   type Settings,
   type MergedSettings,
@@ -68,7 +68,7 @@ import {
 } from './policy.js';
 import { ExtensionManager } from './extension-manager.js';
 import { McpServerEnablementManager } from './mcp/mcpServerEnablement.js';
-import type { ExtensionEvents } from '@google/gemini-cli-core/src/utils/extensionLoader.js';
+import type { ExtensionEvents } from '@pocketclaw/core/src/utils/extensionLoader.js';
 import { requestConsentNonInteractive } from './extensions/consent.js';
 import { promptForSetting } from './extensions/extensionSettings.js';
 import type { EventEmitter } from 'node:stream';
@@ -162,7 +162,7 @@ export async function parseArguments(
     .locale('en')
     .scriptName('gemini')
     .usage(
-      'Usage: gemini [options] [command]\n\nGemini CLI - Defaults to interactive mode. Use -p/--prompt for non-interactive (headless) mode.',
+      'Usage: gemini [options] [command]\n\nPocketClaw - Defaults to interactive mode. Use -p/--prompt for non-interactive (headless) mode.',
     )
     .option('isCommand', {
       type: 'boolean',
@@ -262,7 +262,7 @@ export async function parseArguments(
   yargsInstance.command(hooksCommand);
 
   yargsInstance
-    .command('$0 [query..]', 'Launch Gemini CLI', (yargsInstance) =>
+    .command('$0 [query..]', 'Launch PocketClaw', (yargsInstance) =>
       yargsInstance
         .positional('query', {
           description:

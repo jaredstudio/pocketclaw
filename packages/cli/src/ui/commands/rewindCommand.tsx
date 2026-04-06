@@ -24,7 +24,7 @@ import {
   type ChatRecordingService,
   type GeminiClient,
   convertSessionToClientHistory,
-} from '@google/gemini-cli-core';
+} from '@pocketclaw/core';
 
 /**
  * Helper function to handle the core logic of rewinding a conversation.
@@ -32,7 +32,7 @@ import {
  * update the client and UI history, and clear the component.
  *
  * @param context The command context.
- * @param client Gemini client
+ * @param client PocketClawent
  * @param recordingService The chat recording service.
  * @param messageId The ID of the message to rewind to.
  * @param newText The new text for the input field after rewinding.

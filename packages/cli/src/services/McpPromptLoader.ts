@@ -8,7 +8,7 @@ import {
   getErrorMessage,
   getMCPServerPrompts,
   type Config,
-} from '@google/gemini-cli-core';
+} from '@pocketclaw/core';
 import {
   CommandKind,
   type CommandContext,

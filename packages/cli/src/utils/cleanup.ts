@@ -12,8 +12,8 @@ import {
   isTelemetrySdkInitialized,
   ExitCodes,
   resetBrowserSession,
-} from '@google/gemini-cli-core';
-import type { Config } from '@google/gemini-cli-core';
+} from '@pocketclaw/core';
+import type { Config } from '@pocketclaw/core';
 
 const cleanupFunctions: Array<(() => void) | (() => Promise<void>)> = [];
 const syncCleanupFunctions: Array<() => void> = [];

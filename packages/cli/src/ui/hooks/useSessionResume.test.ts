@@ -13,7 +13,7 @@ import type {
   ResumedSessionData,
   ConversationRecord,
   MessageRecord,
-} from '@google/gemini-cli-core';
+} from '@pocketclaw/core';
 import type { UseHistoryManagerReturn } from './useHistoryManager.js';
 import type { HistoryItemWithoutId } from '../types.js';
 
@@ -120,7 +120,7 @@ describe('useSessionResume', () => {
       );
     });
 
-    it('should not load history if Gemini client is not initialized', async () => {
+    it('should not load history if PocketClawent is not initialized', async () => {
       const { result } = await renderHook(() =>
         useSessionResume({
           ...getDefaultProps(),
@@ -341,7 +341,7 @@ describe('useSessionResume', () => {
       expect(mockGeminiClient.resumeChat).not.toHaveBeenCalled();
     });
 
-    it('should not resume when Gemini client is not initialized', async () => {
+    it('should not resume when PocketClawent is not initialized', async () => {
       const conversation: ConversationRecord = {
         sessionId: 'auto-resume-123',
         projectHash: 'project-123',

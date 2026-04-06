@@ -9,7 +9,7 @@ import {
   ShellExecutionService,
   ShellTool,
   type Config as CoreConfig,
-} from '@google/gemini-cli-core';
+} from '@pocketclaw/core';
 import type {
   AgentShell,
   AgentShellResult,

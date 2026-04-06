@@ -28,7 +28,7 @@ import {
   type Config,
   ShellExecutionService,
   CoreToolCallStatus,
-} from '@google/gemini-cli-core';
+} from '@pocketclaw/core';
 import {
   calculateShellMaxLines,
   calculateToolContentMaxLines,

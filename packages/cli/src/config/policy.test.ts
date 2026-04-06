@@ -15,12 +15,12 @@ import {
   disableWorkspacePolicies,
   setDisableWorkspacePolicies,
 } from './policy.js';
-import { writeToStderr } from '@google/gemini-cli-core';
+import { writeToStderr } from '@pocketclaw/core';
 
 // Mock debugLogger to avoid noise in test output
-vi.mock('@google/gemini-cli-core', async (importOriginal) => {
+vi.mock('@pocketclaw/core', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@google/gemini-cli-core')>();
+    await importOriginal<typeof import('@pocketclaw/core')>();
   return {
     ...actual,
     debugLogger: {

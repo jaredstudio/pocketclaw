@@ -9,7 +9,7 @@ import {
   listMemoryFiles,
   refreshMemory,
   showMemory,
-} from '@google/gemini-cli-core';
+} from '@pocketclaw/core';
 import type {
   Command,
   CommandContext,

@@ -101,7 +101,7 @@ const bundleMcpDest = join(bundleDir, 'bundled');
 if (!existsSync(bundleMcpSrc)) {
   console.error(
     `Error: chrome-devtools-mcp bundle not found at ${bundleMcpSrc}.\n` +
-      `Run "npm run bundle:browser-mcp -w @google/gemini-cli-core" first.`,
+      `Run "npm run bundle:browser-mcp -w @pocketclaw/core" first.`,
   );
   process.exit(1);
 }

@@ -13,7 +13,7 @@ import {
   type ExtensionInstallMetadata,
   type GeminiCLIExtension,
   coreEvents,
-} from '@google/gemini-cli-core';
+} from '@pocketclaw/core';
 import { ExtensionManager } from '../extension-manager.js';
 import { createTestMergedSettings } from '../settings.js';
 import { isWorkspaceTrusted } from '../trustedFolders.js';
@@ -42,9 +42,9 @@ vi.mock('node:fs', async (importOriginal) => {
   };
 });
 
-vi.mock('@google/gemini-cli-core', async (importOriginal) => {
+vi.mock('@pocketclaw/core', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@google/gemini-cli-core')>();
+    await importOriginal<typeof import('@pocketclaw/core')>();
   return {
     ...actual,
     KeychainTokenStorage: vi.fn(),

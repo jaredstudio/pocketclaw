@@ -9,11 +9,11 @@ import { aboutCommand } from './aboutCommand.js';
 import { type CommandContext } from './types.js';
 import { createMockCommandContext } from '../../test-utils/mockCommandContext.js';
 import { MessageType } from '../types.js';
-import { IdeClient, getVersion } from '@google/gemini-cli-core';
+import { IdeClient, getVersion } from '@pocketclaw/core';
 
-vi.mock('@google/gemini-cli-core', async (importOriginal) => {
+vi.mock('@pocketclaw/core', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@google/gemini-cli-core')>();
+    await importOriginal<typeof import('@pocketclaw/core')>();
   return {
     ...actual,
     IdeClient: {

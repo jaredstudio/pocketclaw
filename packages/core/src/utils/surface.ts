@@ -22,7 +22,7 @@ export const SURFACE_NOT_SET = 'terminal';
 export function determineSurface(): string {
   // Priority 1 & 2: Explicit overrides from environment variables.
   const customSurface =
-    process.env['GEMINI_CLI_SURFACE'] || process.env['SURFACE'];
+    process.env['POCKETCLAW_SURFACE'] || process.env['SURFACE'];
   if (customSurface) {
     return customSurface;
   }

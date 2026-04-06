@@ -11,9 +11,9 @@ import {
   CoreToolCallStatus,
   ApprovalMode,
   makeFakeConfig,
-} from '@google/gemini-cli-core';
+} from '@pocketclaw/core';
 import { type UIState } from './contexts/UIStateContext.js';
-import type { SerializableConfirmationDetails } from '@google/gemini-cli-core';
+import type { SerializableConfirmationDetails } from '@pocketclaw/core';
 import { act } from 'react';
 import { StreamingState } from './types.js';
 

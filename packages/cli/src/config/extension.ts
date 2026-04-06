@@ -8,7 +8,7 @@ import type {
   MCPServerConfig,
   ExtensionInstallMetadata,
   CustomTheme,
-} from '@google/gemini-cli-core';
+} from '@pocketclaw/core';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { INSTALL_METADATA_FILENAME } from './extensions/variables.js';

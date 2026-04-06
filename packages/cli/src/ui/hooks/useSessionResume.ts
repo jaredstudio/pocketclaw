@@ -10,7 +10,7 @@ import {
   type Config,
   type ResumedSessionData,
   convertSessionToClientHistory,
-} from '@google/gemini-cli-core';
+} from '@pocketclaw/core';
 import type { Part } from '@google/genai';
 import type { HistoryItemWithoutId } from '../types.js';
 import type { UseHistoryManagerReturn } from './useHistoryManager.js';
@@ -83,7 +83,7 @@ export function useSessionResume({
           workspaceContext.addDirectories(resumedData.conversation.directories);
         }
 
-        // Give the history to the Gemini client.
+        // Give the history to the PocketClawent.
         await config.getGeminiClient()?.resumeChat(clientHistory, resumedData);
       } catch (error) {
         coreEvents.emitFeedback(

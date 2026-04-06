@@ -18,7 +18,7 @@ import { MessageType, type HistoryItem } from '../types.js';
 import {
   refreshServerHierarchicalMemory,
   type Config,
-} from '@google/gemini-cli-core';
+} from '@pocketclaw/core';
 import {
   expandHomeDir,
   getDirectorySuggestions,

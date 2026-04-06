@@ -20,7 +20,7 @@ import {
   CoreToolCallStatus,
   checkExhaustive,
   type SubagentActivityItem,
-} from '@google/gemini-cli-core';
+} from '@pocketclaw/core';
 import type { PartListUnion } from '@google/genai';
 import { type ReactNode } from 'react';
 

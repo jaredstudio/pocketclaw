@@ -205,7 +205,7 @@ Sources:
           {
             content: {
               role: 'model',
-              parts: [{ text: 'こんにちは! Gemini CLI✨️' }],
+              parts: [{ text: 'こんにちは! PocketClaw✨️' }],
             },
             groundingMetadata: {
               groundingChunks: [
@@ -223,7 +223,7 @@ Sources:
                 },
                 {
                   web: {
-                    title: 'Gemini CLI: your open-source AI agent',
+                    title: 'PocketClaw: your open-source AI agent',
                     uri: 'https://blog.google/technology/developers/introducing-gemini-cli-open-source-ai-agent/',
                   },
                 },
@@ -239,7 +239,7 @@ Sources:
                 },
                 {
                   segment: {
-                    // Byte range of "Gemini CLI✨️" (utf-8 encoded)
+                    // Byte range of "PocketClaw✨️" (utf-8 encoded)
                     startIndex: 17,
                     endIndex: 33,
                   },
@@ -256,12 +256,12 @@ Sources:
 
       const expectedLlmContent = `Web search results for "multibyte query":
 
-こんにちは![1] Gemini CLI✨️[2][3]
+こんにちは![1] PocketClaw✨️[2][3]
 
 Sources:
 [1] Japanese Greeting (https://example.test/japanese-greeting)
 [2] google-gemini/gemini-cli (https://github.com/google-gemini/gemini-cli)
-[3] Gemini CLI: your open-source AI agent (https://blog.google/technology/developers/introducing-gemini-cli-open-source-ai-agent/)`;
+[3] PocketClaw: your open-source AI agent (https://blog.google/technology/developers/introducing-gemini-cli-open-source-ai-agent/)`;
 
       expect(result.llmContent).toBe(expectedLlmContent);
       expect(result.returnDisplay).toBe(

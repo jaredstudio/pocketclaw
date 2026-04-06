@@ -13,7 +13,7 @@ import {
   spawnAsync,
   escapePath,
   Storage,
-} from '@google/gemini-cli-core';
+} from '@pocketclaw/core';
 
 /**
  * Supported image file extensions based on Gemini API.

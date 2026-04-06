@@ -33,7 +33,7 @@ import {
   type AdminControlsSettings,
   debugLogger,
   isHeadlessMode,
-} from '@google/gemini-cli-core';
+} from '@pocketclaw/core';
 
 import { loadCliConfig, parseArguments } from './config/config.js';
 import * as cliConfig from './config/config.js';
@@ -447,7 +447,7 @@ export async function main() {
   }
 
   // We are now past the logic handling potentially launching a child process
-  // to run Gemini CLI. It is now safe to perform expensive initialization that
+  // to run PocketClaw. It is now safe to perform expensive initialization that
   // may have side effects.
   {
     const loadConfigHandle = startupProfiler.start('load_cli_config');

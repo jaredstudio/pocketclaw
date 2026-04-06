@@ -23,7 +23,7 @@ import {
   MCPServerStatus,
   type McpClient,
   coreEvents,
-} from '@google/gemini-cli-core';
+} from '@pocketclaw/core';
 import { Text } from 'ink';
 
 // Mock GeminiSpinner

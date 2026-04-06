@@ -5,7 +5,7 @@
  */
 
 /**
- * @fileoverview LegacyAgentSession backed by the existing Gemini client +
+ * @fileoverview LegacyAgentSession backed by the existing PocketClawent +
  * scheduler loop, adapted to the merged AgentProtocol / AgentSession surface.
  */
 

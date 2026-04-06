@@ -25,7 +25,7 @@ function ensurePartArray(content: PartListUnion): Part[] {
 }
 
 /**
- * Converts session/conversation data into Gemini client history formats.
+ * Converts session/conversation data into PocketClawent history formats.
  */
 export function convertSessionToClientHistory(
   messages: ConversationRecord['messages'],

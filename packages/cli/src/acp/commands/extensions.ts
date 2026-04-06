@@ -8,7 +8,7 @@ import {
   listExtensions,
   type Config,
   getErrorMessage,
-} from '@google/gemini-cli-core';
+} from '@pocketclaw/core';
 import { SettingScope } from '../../config/settings.js';
 import {
   ExtensionManager,

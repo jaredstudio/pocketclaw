@@ -18,7 +18,7 @@ const debugLogger = vi.hoisted(() => ({
   debug: vi.fn(),
 }));
 
-vi.mock('@google/gemini-cli-core', () => ({
+vi.mock('@pocketclaw/core', () => ({
   writeToStdout,
   debugLogger,
 }));

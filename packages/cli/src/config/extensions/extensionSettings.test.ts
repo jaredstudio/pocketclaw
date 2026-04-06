@@ -21,7 +21,7 @@ import { ExtensionStorage } from './storage.js';
 import prompts from 'prompts';
 import * as fsPromises from 'node:fs/promises';
 import * as fs from 'node:fs';
-import { KeychainTokenStorage } from '@google/gemini-cli-core';
+import { KeychainTokenStorage } from '@pocketclaw/core';
 import { EXTENSION_SETTINGS_FILENAME } from './variables.js';
 
 vi.mock('prompts');
@@ -33,9 +33,9 @@ vi.mock('os', async (importOriginal) => {
   };
 });
 
-vi.mock('@google/gemini-cli-core', async (importOriginal) => {
+vi.mock('@pocketclaw/core', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@google/gemini-cli-core')>();
+    await importOriginal<typeof import('@pocketclaw/core')>();
   return {
     ...actual,
     KeychainTokenStorage: vi.fn(),
@@ -216,7 +216,7 @@ describe('extensionSettings', () => {
         SENSITIVE_VAR: 'secret',
       };
       const userKeychain = new KeychainTokenStorage(
-        `Gemini CLI Extensions test-ext 12345`,
+        `PocketClaw Extensions test-ext 12345`,
       );
       await userKeychain.setSecret('SENSITIVE_VAR', 'secret');
       const envPath = path.join(extensionDir, '.env');
@@ -256,7 +256,7 @@ describe('extensionSettings', () => {
       };
       const previousSettings = { SENSITIVE_VAR: 'secret' };
       const userKeychain = new KeychainTokenStorage(
-        `Gemini CLI Extensions test-ext 12345`,
+        `PocketClaw Extensions test-ext 12345`,
       );
       await userKeychain.setSecret('SENSITIVE_VAR', 'secret');
 
@@ -422,7 +422,7 @@ describe('extensionSettings', () => {
       );
 
       const userKeychain = new KeychainTokenStorage(
-        `Gemini CLI Extensions test-ext 12345`,
+        `PocketClaw Extensions test-ext 12345`,
       );
       expect(await userKeychain.getSecret('SENSITIVE_VAR')).toBeNull();
     });
@@ -550,7 +550,7 @@ describe('extensionSettings', () => {
       const userEnvPath = path.join(extensionDir, EXTENSION_SETTINGS_FILENAME);
       await fsPromises.writeFile(userEnvPath, 'VAR1=user-value1');
       const userKeychain = new KeychainTokenStorage(
-        `Gemini CLI Extensions test-ext 12345`,
+        `PocketClaw Extensions test-ext 12345`,
       );
       await userKeychain.setSecret('SENSITIVE_VAR', 'user-secret');
 
@@ -574,7 +574,7 @@ describe('extensionSettings', () => {
       );
       await fsPromises.writeFile(workspaceEnvPath, 'VAR1=workspace-value1');
       const workspaceKeychain = new KeychainTokenStorage(
-        `Gemini CLI Extensions test-ext 12345 ${tempWorkspaceDir}`,
+        `PocketClaw Extensions test-ext 12345 ${tempWorkspaceDir}`,
       );
       await workspaceKeychain.setSecret('SENSITIVE_VAR', 'workspace-secret');
 
@@ -598,7 +598,7 @@ describe('extensionSettings', () => {
       );
       fs.mkdirSync(workspaceEnvPath);
       const workspaceKeychain = new KeychainTokenStorage(
-        `Gemini CLI Extensions test-ext 12345 ${tempWorkspaceDir}`,
+        `PocketClaw Extensions test-ext 12345 ${tempWorkspaceDir}`,
       );
       await workspaceKeychain.setSecret('SENSITIVE_VAR', 'workspace-secret');
 
@@ -635,7 +635,7 @@ describe('extensionSettings', () => {
         'VAR1=user-value1\nVAR3=user-value3',
       );
       const userKeychain = new KeychainTokenStorage(
-        `Gemini CLI Extensions test-ext ${extensionId}`,
+        `PocketClaw Extensions test-ext ${extensionId}`,
       );
       await userKeychain.setSecret('VAR2', 'user-secret2');
 
@@ -646,7 +646,7 @@ describe('extensionSettings', () => {
       );
       await fsPromises.writeFile(workspaceEnvPath, 'VAR1=workspace-value1');
       const workspaceKeychain = new KeychainTokenStorage(
-        `Gemini CLI Extensions test-ext ${extensionId} ${tempWorkspaceDir}`,
+        `PocketClaw Extensions test-ext ${extensionId} ${tempWorkspaceDir}`,
       );
       await workspaceKeychain.setSecret('VAR2', 'workspace-secret2');
 
@@ -679,7 +679,7 @@ describe('extensionSettings', () => {
       const userEnvPath = path.join(extensionDir, '.env');
       await fsPromises.writeFile(userEnvPath, 'VAR1=value1\n');
       const userKeychain = new KeychainTokenStorage(
-        `Gemini CLI Extensions test-ext 12345`,
+        `PocketClaw Extensions test-ext 12345`,
       );
       await userKeychain.setSecret('VAR2', 'value2');
       mockRequestSetting.mockClear();
@@ -752,7 +752,7 @@ describe('extensionSettings', () => {
       );
 
       const userKeychain = new KeychainTokenStorage(
-        `Gemini CLI Extensions test-ext 12345`,
+        `PocketClaw Extensions test-ext 12345`,
       );
       expect(await userKeychain.getSecret('VAR2')).toBe('new-value2');
     });
@@ -770,7 +770,7 @@ describe('extensionSettings', () => {
       );
 
       const workspaceKeychain = new KeychainTokenStorage(
-        `Gemini CLI Extensions test-ext 12345 ${tempWorkspaceDir}`,
+        `PocketClaw Extensions test-ext 12345 ${tempWorkspaceDir}`,
       );
       expect(await workspaceKeychain.getSecret('VAR2')).toBe(
         'new-workspace-secret',
@@ -824,7 +824,7 @@ describe('extensionSettings', () => {
       );
 
       const userKeychain = new KeychainTokenStorage(
-        `Gemini CLI Extensions test-ext 12345`,
+        `PocketClaw Extensions test-ext 12345`,
       );
       expect(await userKeychain.getSecret('VAR2')).toBeNull();
     });
@@ -850,7 +850,7 @@ describe('extensionSettings', () => {
       mockRequestSetting.mockResolvedValue('');
       // Ensure it doesn't exist first
       const userKeychain = new KeychainTokenStorage(
-        `Gemini CLI Extensions test-ext 12345`,
+        `PocketClaw Extensions test-ext 12345`,
       );
       await userKeychain.deleteSecret('VAR2');
 

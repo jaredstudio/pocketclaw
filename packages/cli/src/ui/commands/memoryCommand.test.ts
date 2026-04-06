@@ -19,11 +19,11 @@ import {
   addMemory,
   listMemoryFiles,
   flattenMemory,
-} from '@google/gemini-cli-core';
+} from '@pocketclaw/core';
 
-vi.mock('@google/gemini-cli-core', async (importOriginal) => {
+vi.mock('@pocketclaw/core', async (importOriginal) => {
   const original =
-    await importOriginal<typeof import('@google/gemini-cli-core')>();
+    await importOriginal<typeof import('@pocketclaw/core')>();
   return {
     ...original,
     getErrorMessage: vi.fn((error: unknown) => {

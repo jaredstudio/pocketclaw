@@ -21,12 +21,12 @@ import {
   FatalAuthenticationError,
   PolicyDecision,
   PRIORITY_YOLO_ALLOW_ALL,
-} from '@google/gemini-cli-core';
+} from '@pocketclaw/core';
 
 // Mock dependencies
-vi.mock('@google/gemini-cli-core', async (importOriginal) => {
+vi.mock('@pocketclaw/core', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@google/gemini-cli-core')>();
+    await importOriginal<typeof import('@pocketclaw/core')>();
   return {
     ...actual,
     PRIORITY_YOLO_ALLOW_ALL: 998,

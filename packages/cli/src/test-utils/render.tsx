@@ -42,8 +42,8 @@ import {
   type OverflowState,
 } from '../ui/contexts/OverflowContext.js';
 
-import { makeFakeConfig } from '@google/gemini-cli-core';
-import { type Config } from '@google/gemini-cli-core';
+import { makeFakeConfig } from '@pocketclaw/core';
+import { type Config } from '@pocketclaw/core';
 import { FakePersistentState } from './persistentStateFake.js';
 import { AppContext, type AppState } from '../ui/contexts/AppContext.js';
 import { createMockSettings } from './settings.js';

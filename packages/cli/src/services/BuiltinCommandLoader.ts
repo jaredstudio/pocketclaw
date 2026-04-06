@@ -11,13 +11,13 @@ import {
   type SlashCommand,
   type CommandContext,
 } from '../ui/commands/types.js';
-import type { MessageActionReturn, Config } from '@google/gemini-cli-core';
+import type { MessageActionReturn, Config } from '@pocketclaw/core';
 import {
   isNightly,
   startupProfiler,
   getAdminErrorMessage,
   AuthType,
-} from '@google/gemini-cli-core';
+} from '@pocketclaw/core';
 import { aboutCommand } from '../ui/commands/aboutCommand.js';
 import { agentsCommand } from '../ui/commands/agentsCommand.js';
 import { authCommand } from '../ui/commands/authCommand.js';
@@ -64,7 +64,7 @@ import { upgradeCommand } from '../ui/commands/upgradeCommand.js';
 
 /**
  * Loads the core, hard-coded slash commands that are an integral part
- * of the Gemini CLI application.
+ * of the PocketClaw application.
  */
 export class BuiltinCommandLoader implements ICommandLoader {
   constructor(private config: Config | null) {}

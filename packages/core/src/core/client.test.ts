@@ -158,7 +158,7 @@ async function fromAsync<T>(promise: AsyncGenerator<T>): Promise<readonly T[]> {
   return results;
 }
 
-describe('Gemini Client (client.ts)', () => {
+describe('PocketClawent (client.ts)', () => {
   let mockContentGenerator: ContentGenerator;
   let mockConfig: Config;
   let client: GeminiClient;
@@ -415,7 +415,7 @@ describe('Gemini Client (client.ts)', () => {
 
       // The first message should be the environment context
       expect(history[0].role).toBe('user');
-      expect(history[0].parts?.[0]?.text).toContain('This is the Gemini CLI');
+      expect(history[0].parts?.[0]?.text).toContain('This is the PocketClaw');
       expect(history[0].parts?.[0]?.text).toContain(
         "The project's temporary directory is:",
       );

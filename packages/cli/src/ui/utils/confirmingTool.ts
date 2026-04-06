@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { CoreToolCallStatus } from '@google/gemini-cli-core';
+import { CoreToolCallStatus } from '@pocketclaw/core';
 import {
   type HistoryItemWithoutId,
   type IndividualToolCallDisplay,

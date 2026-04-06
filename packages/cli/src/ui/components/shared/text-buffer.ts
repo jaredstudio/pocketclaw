@@ -15,7 +15,7 @@ import {
   debugLogger,
   unescapePath,
   type EditorType,
-} from '@google/gemini-cli-core';
+} from '@pocketclaw/core';
 import {
   toCodePoints,
   cpLen,

@@ -16,7 +16,7 @@ import {
   UserAccountManager,
   debugLogger,
   getVersion,
-} from '@google/gemini-cli-core';
+} from '@pocketclaw/core';
 
 export const aboutCommand: SlashCommand = {
   name: 'about',

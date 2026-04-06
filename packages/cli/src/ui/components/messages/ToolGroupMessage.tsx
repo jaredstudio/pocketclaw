@@ -37,7 +37,7 @@ import {
   isFileDiff,
   isGrepResult,
   isListResult,
-} from '@google/gemini-cli-core';
+} from '@pocketclaw/core';
 import { useUIState } from '../../contexts/UIStateContext.js';
 import { getToolGroupBorderAppearance } from '../../utils/borderStyles.js';
 import { useSettings } from '../../contexts/SettingsContext.js';
