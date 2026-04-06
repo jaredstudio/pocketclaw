@@ -13,6 +13,10 @@ import {
   type EmbedContentResponse,
   type EmbedContentParameters,
 } from '@google/genai';
+import {
+  createProviderFromSettings,
+  detectProvider,
+} from '../providers/providerFactory.js';
 import * as os from 'node:os';
 import { createCodeAssistContentGenerator } from '../code_assist/codeAssist.js';
 import { isCloudShell } from '../ide/detect-ide.js';
@@ -63,6 +67,7 @@ export enum AuthType {
   LEGACY_CLOUD_SHELL = 'cloud-shell',
   COMPUTE_ADC = 'compute-default-credentials',
   GATEWAY = 'gateway',
+  POCKETCLAW_PROVIDER = 'pocketclaw-provider',
 }
 
 /**
@@ -74,6 +79,26 @@ export enum AuthType {
  * 3. GEMINI_API_KEY -> USE_GEMINI
  */
 export function getAuthTypeFromEnv(): AuthType | undefined {
+  // Check for PocketClaw alternative providers first
+  if (
+    process.env['OPENROUTER_API_KEY'] ||
+    process.env['ANTHROPIC_API_KEY'] ||
+    process.env['OLLAMA_BASE_URL']
+  ) {
+    return AuthType.POCKETCLAW_PROVIDER;
+  }
+  // Check if settings.json has a provider configured
+  const settings = detectProvider();
+  if (settings && settings.provider !== undefined) {
+    // Only use PocketClaw provider if it's not a Google key scenario
+    if (
+      settings.provider === 'openrouter' ||
+      settings.provider === 'anthropic' ||
+      settings.provider === 'ollama'
+    ) {
+      return AuthType.POCKETCLAW_PROVIDER;
+    }
+  }
   if (process.env['GOOGLE_GENAI_USE_GCA'] === 'true') {
     return AuthType.LOGIN_WITH_GOOGLE;
   }
@@ -168,6 +193,18 @@ export async function createContentGenerator(
   sessionId?: string,
 ): Promise<ContentGenerator> {
   const generator = await (async () => {
+    // PocketClaw alternative providers (OpenRouter, Anthropic, Ollama)
+    if (config.authType === AuthType.POCKETCLAW_PROVIDER) {
+      const providerSettings = detectProvider();
+      if (providerSettings) {
+        const provider = createProviderFromSettings(providerSettings);
+        return new LoggingContentGenerator(provider, gcConfig);
+      }
+      throw new Error(
+        'PocketClaw provider configured but no settings found. Run setup wizard.',
+      );
+    }
+
     if (gcConfig.fakeResponses) {
       const fakeGenerator = await FakeContentGenerator.fromFile(
         gcConfig.fakeResponses,

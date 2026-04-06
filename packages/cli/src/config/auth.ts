@@ -9,6 +9,12 @@ import { loadEnvironment, loadSettings } from './settings.js';
 
 export function validateAuthMethod(authMethod: string): string | null {
   loadEnvironment(loadSettings().merged, process.cwd());
+
+  // PocketClaw alternative providers need no Google-specific validation
+  if (authMethod === AuthType.POCKETCLAW_PROVIDER) {
+    return null;
+  }
+
   if (
     authMethod === AuthType.LOGIN_WITH_GOOGLE ||
     authMethod === AuthType.COMPUTE_ADC
@@ -44,3 +50,4 @@ export function validateAuthMethod(authMethod: string): string | null {
 
   return 'Invalid auth method selected.';
 }
+
