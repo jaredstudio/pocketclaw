@@ -44,9 +44,11 @@ elif [ "$(uname)" = "Linux" ]; then
 fi
 info "Platform: $PLATFORM"
 
-# ─── Step 1: Check/install Node.js ───
+# ═══════════════════════════════════════════
+# STEP 1: Check/install Node.js
+# ═══════════════════════════════════════════
 echo ""
-echo -e "${BOLD}[1/5] Checking Node.js...${RESET}"
+echo -e "${BOLD}[1/6] Checking Node.js...${RESET}"
 if command -v node &>/dev/null; then
   NODE_VER=$(node -v)
   log "Node.js $NODE_VER found"
@@ -74,9 +76,11 @@ else
   log "Node.js installed"
 fi
 
-# ─── Step 2: Check/install Git ───
+# ═══════════════════════════════════════════
+# STEP 2: Check/install Git
+# ═══════════════════════════════════════════
 echo ""
-echo -e "${BOLD}[2/5] Checking Git...${RESET}"
+echo -e "${BOLD}[2/6] Checking Git...${RESET}"
 if command -v git &>/dev/null; then
   log "Git found"
 else
@@ -91,9 +95,11 @@ else
   log "Git installed"
 fi
 
-# ─── Step 3: Clone or update repo ───
+# ═══════════════════════════════════════════
+# STEP 3: Clone or update repo
+# ═══════════════════════════════════════════
 echo ""
-echo -e "${BOLD}[3/5] Getting PocketClaw...${RESET}"
+echo -e "${BOLD}[3/6] Getting PocketClaw...${RESET}"
 if [ -d "$INSTALL_DIR/repo" ]; then
   info "Updating existing installation..."
   cd "$INSTALL_DIR/repo"
@@ -106,13 +112,14 @@ else
   log "Downloaded PocketClaw"
 fi
 
-# ─── Step 4: Install & Build ───
+# ═══════════════════════════════════════════
+# STEP 4: Install & Build
+# ═══════════════════════════════════════════
 echo ""
-echo -e "${BOLD}[4/5] Building PocketClaw...${RESET}"
+echo -e "${BOLD}[4/6] Building PocketClaw...${RESET}"
 info "Installing dependencies (this may take a minute)..."
 
 if [ "$PLATFORM" = "termux" ]; then
-  # Termux: install build tools and skip native module scripts that need Android NDK
   pkg install -y python make 2>/dev/null || true
   npm install --no-fund --no-audit --ignore-scripts 2>/dev/null || npm install --ignore-scripts
   log "Dependencies installed (native modules skipped for Termux)"
@@ -128,9 +135,11 @@ npm run build 2>/dev/null || {
 }
 log "Build complete"
 
-# ─── Step 5: Create launcher script ───
+# ═══════════════════════════════════════════
+# STEP 5: Create launcher script
+# ═══════════════════════════════════════════
 echo ""
-echo -e "${BOLD}[5/5] Setting up command...${RESET}"
+echo -e "${BOLD}[5/6] Setting up command...${RESET}"
 mkdir -p "$BIN_DIR"
 
 cat > "$BIN_DIR/pocketclaw" << 'LAUNCHER'
@@ -142,7 +151,7 @@ LAUNCHER
 
 chmod +x "$BIN_DIR/pocketclaw"
 
-# Add to PATH if not already there
+# Add to PATH
 SHELL_RC=""
 if [ -f "$HOME/.bashrc" ]; then
   SHELL_RC="$HOME/.bashrc"
@@ -166,25 +175,166 @@ fi
 export PATH="$BIN_DIR:$PATH"
 log "Command 'pocketclaw' is ready"
 
-# ─── Done! ───
+# ═══════════════════════════════════════════
+# STEP 6: Configure OpenRouter
+# ═══════════════════════════════════════════
 echo ""
 echo -e "${CYAN}${BOLD}╔════════════════════════════════════════╗${RESET}"
-echo -e "${CYAN}${BOLD}║     🐾 PocketClaw Installed! 🎉       ║${RESET}"
+echo -e "${CYAN}${BOLD}║   🔑 OpenRouter Setup                 ║${RESET}"
 echo -e "${CYAN}${BOLD}╚════════════════════════════════════════╝${RESET}"
 echo ""
-echo -e "${BOLD}Next — Set up your AI provider:${RESET}"
+echo -e "${BOLD}PocketClaw uses OpenRouter for FREE AI models.${RESET}"
+echo -e "${DIM}Get your free API key at: ${RESET}${CYAN}https://openrouter.ai/keys${RESET}"
 echo ""
-echo -e "  ${GREEN}Option 1: OpenRouter (FREE)${RESET}"
-echo -e "  ${DIM}Get a key at: https://openrouter.ai/keys${RESET}"
-echo -e "  export OPENROUTER_API_KEY=\"your-key\""
+
+# ─── API Key Input ───
+echo -e "${BOLD}Enter your OpenRouter API Key:${RESET}"
+echo -e "${DIM}(starts with sk-or-v1-...)${RESET}"
+echo -n "> "
+read -r API_KEY
+
+if [ -z "$API_KEY" ]; then
+  warn "No API key entered. You can set it later by running:"
+  echo -e "  ${CYAN}pocketclaw-setup${RESET}"
+  API_KEY="YOUR_KEY_HERE"
+fi
+
+# ─── Model Selection ───
 echo ""
-echo -e "  ${GREEN}Option 2: Anthropic Claude${RESET}"
-echo -e "  export ANTHROPIC_API_KEY=\"your-key\""
+echo -e "${BOLD}Choose your AI model:${RESET}"
 echo ""
-echo -e "  ${GREEN}Option 3: Ollama (local/offline)${RESET}"
-echo -e "  export OLLAMA_BASE_URL=\"http://localhost:11434\""
+echo -e "  ${GREEN}1)${RESET} Qwen 3.6 Plus        ${DIM}— Best for general coding (FREE)${RESET}"
+echo -e "  ${GREEN}2)${RESET} Qwen 3 Coder          ${DIM}— Best for code generation (FREE)${RESET}"
+echo -e "  ${GREEN}3)${RESET} Gemma 3 27B            ${DIM}— Google's best free model${RESET}"
+echo -e "  ${GREEN}4)${RESET} Devstral Small         ${DIM}— Mistral coding model (FREE)${RESET}"
+echo -e "  ${GREEN}5)${RESET} Llama 4 Scout          ${DIM}— Meta's latest model (FREE)${RESET}"
+echo -e "  ${GREEN}6)${RESET} Custom                 ${DIM}— Enter any OpenRouter model ID${RESET}"
 echo ""
-echo -e "${BOLD}Then run:${RESET}"
-echo -e "  ${CYAN}source $SHELL_RC${RESET}"
-echo -e "  ${CYAN}pocketclaw${RESET}"
+echo -n "Pick a number [1-6] (default: 1): "
+read -r MODEL_CHOICE
+
+case "$MODEL_CHOICE" in
+  2) MODEL_ID="qwen/qwen3-coder:free" ;;
+  3) MODEL_ID="google/gemma-3-27b-it:free" ;;
+  4) MODEL_ID="mistralai/devstral-small:free" ;;
+  5) MODEL_ID="meta-llama/llama-4-scout:free" ;;
+  6)
+    echo ""
+    echo -e "${BOLD}Enter model ID:${RESET}"
+    echo -e "${DIM}(e.g. qwen/qwen3.6-plus:free)${RESET}"
+    echo -n "> "
+    read -r MODEL_ID
+    if [ -z "$MODEL_ID" ]; then
+      MODEL_ID="qwen/qwen3.6-plus:free"
+    fi
+    ;;
+  *) MODEL_ID="qwen/qwen3.6-plus:free" ;;
+esac
+
+log "Model: $MODEL_ID"
+
+# ─── Write settings.json ───
+mkdir -p "$HOME/.pocketclaw"
+
+cat > "$HOME/.pocketclaw/settings.json" << SETTINGS
+{
+  "env": {
+    "ANTHROPIC_BASE_URL": "https://openrouter.ai/api",
+    "ANTHROPIC_AUTH_TOKEN": "${API_KEY}",
+    "ANTHROPIC_API_KEY": "",
+    "ANTHROPIC_MODEL": "${MODEL_ID}"
+  },
+  "model": "sonnet[1m]"
+}
+SETTINGS
+
+log "Settings saved to ~/.pocketclaw/settings.json"
+
+# ─── Create reconfigure script ───
+cat > "$BIN_DIR/pocketclaw-setup" << 'SETUP'
+#!/bin/bash
+BOLD='\033[1m'
+DIM='\033[2m'
+GREEN='\033[32m'
+CYAN='\033[36m'
+RESET='\033[0m'
+
+echo ""
+echo -e "${CYAN}${BOLD}🔑 PocketClaw — Reconfigure OpenRouter${RESET}"
+echo ""
+
+echo -e "${BOLD}Enter your OpenRouter API Key:${RESET}"
+echo -e "${DIM}(starts with sk-or-v1-...)${RESET}"
+echo -n "> "
+read -r API_KEY
+
+if [ -z "$API_KEY" ]; then
+  echo "Cancelled."
+  exit 0
+fi
+
+echo ""
+echo -e "${BOLD}Choose your AI model:${RESET}"
+echo ""
+echo -e "  ${GREEN}1)${RESET} Qwen 3.6 Plus        ${DIM}— General coding (FREE)${RESET}"
+echo -e "  ${GREEN}2)${RESET} Qwen 3 Coder          ${DIM}— Code generation (FREE)${RESET}"
+echo -e "  ${GREEN}3)${RESET} Gemma 3 27B            ${DIM}— Google free model${RESET}"
+echo -e "  ${GREEN}4)${RESET} Devstral Small         ${DIM}— Mistral coding (FREE)${RESET}"
+echo -e "  ${GREEN}5)${RESET} Llama 4 Scout          ${DIM}— Meta model (FREE)${RESET}"
+echo -e "  ${GREEN}6)${RESET} Custom                 ${DIM}— Enter model ID${RESET}"
+echo ""
+echo -n "Pick [1-6] (default: 1): "
+read -r CHOICE
+
+case "$CHOICE" in
+  2) MODEL="qwen/qwen3-coder:free" ;;
+  3) MODEL="google/gemma-3-27b-it:free" ;;
+  4) MODEL="mistralai/devstral-small:free" ;;
+  5) MODEL="meta-llama/llama-4-scout:free" ;;
+  6)
+    echo -n "Model ID: "
+    read -r MODEL
+    [ -z "$MODEL" ] && MODEL="qwen/qwen3.6-plus:free"
+    ;;
+  *) MODEL="qwen/qwen3.6-plus:free" ;;
+esac
+
+mkdir -p "$HOME/.pocketclaw"
+cat > "$HOME/.pocketclaw/settings.json" << EOF
+{
+  "env": {
+    "ANTHROPIC_BASE_URL": "https://openrouter.ai/api",
+    "ANTHROPIC_AUTH_TOKEN": "${API_KEY}",
+    "ANTHROPIC_API_KEY": "",
+    "ANTHROPIC_MODEL": "${MODEL}"
+  },
+  "model": "sonnet[1m]"
+}
+EOF
+
+echo ""
+echo -e "${GREEN}✓${RESET} Settings saved!"
+echo -e "${GREEN}✓${RESET} Model: ${MODEL}"
+echo -e "${CYAN}Run 'pocketclaw' to start.${RESET}"
+SETUP
+
+chmod +x "$BIN_DIR/pocketclaw-setup"
+
+# ═══════════════════════════════════════════
+# DONE
+# ═══════════════════════════════════════════
+echo ""
+echo -e "${CYAN}${BOLD}╔════════════════════════════════════════╗${RESET}"
+echo -e "${CYAN}${BOLD}║    🐾 PocketClaw is Ready! 🎉         ║${RESET}"
+echo -e "${CYAN}${BOLD}╚════════════════════════════════════════╝${RESET}"
+echo ""
+echo -e "${BOLD}Your configuration:${RESET}"
+echo -e "  API Key:  ${DIM}${API_KEY:0:12}...${RESET}"
+echo -e "  Model:    ${GREEN}${MODEL_ID}${RESET}"
+echo -e "  Settings: ${DIM}~/.pocketclaw/settings.json${RESET}"
+echo ""
+echo -e "${BOLD}Commands:${RESET}"
+echo -e "  ${CYAN}source $SHELL_RC${RESET}       ${DIM}← reload PATH (first time only)${RESET}"
+echo -e "  ${CYAN}pocketclaw${RESET}             ${DIM}← start AI coding agent${RESET}"
+echo -e "  ${CYAN}pocketclaw-setup${RESET}       ${DIM}← change API key or model${RESET}"
 echo ""
