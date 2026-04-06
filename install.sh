@@ -110,8 +110,16 @@ fi
 echo ""
 echo -e "${BOLD}[4/5] Building PocketClaw...${RESET}"
 info "Installing dependencies (this may take a minute)..."
-npm install --no-fund --no-audit 2>/dev/null || npm install
-log "Dependencies installed"
+
+if [ "$PLATFORM" = "termux" ]; then
+  # Termux: install build tools and skip native module scripts that need Android NDK
+  pkg install -y python make 2>/dev/null || true
+  npm install --no-fund --no-audit --ignore-scripts 2>/dev/null || npm install --ignore-scripts
+  log "Dependencies installed (native modules skipped for Termux)"
+else
+  npm install --no-fund --no-audit 2>/dev/null || npm install
+  log "Dependencies installed"
+fi
 
 info "Building..."
 npm run build 2>/dev/null || {
